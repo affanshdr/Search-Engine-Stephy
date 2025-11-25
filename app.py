@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from flask import Flask, request, render_template, redirect, url_for
 import pickle
 import numpy as np
@@ -129,17 +129,4 @@ if __name__ == '__main__':
         print("\n SERVER GAGAL DIMULAI, model tidak ditemukan: {e}")
     except Exception as e:
         print("\n SERVER GAGAL DIMULAI, Terjadi error saat inisialisasi: {e}")
-=======
-from flask import Flask
-from flask import Flask, request, render_template
 
-
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)
->>>>>>> 111158470b909066ec75464d56766693cf71329d
