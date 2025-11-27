@@ -1,0 +1,23 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #0D0D0D;
+    --secondary: #7F3DFF;
+    --tertiary: #f0f0f0;
+}
+
+
+@font-face {
+    font-family: 'Jaro';
+    src: url('./font/Jaro/Jaro-Regular-VariableFont_opsz.ttf') format('woff2');
+}
+
+
+
+
+

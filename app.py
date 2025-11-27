@@ -17,7 +17,7 @@ MODEL_DIR = "models/"
 BM25_MODEL_PATH = os.path.join(MODEL_DIR, 'bm25_model.pkl')
 CORPUS_DF_PATH = os.path.join(MODEL_DIR, 'df_corpus.pkl')
 SBERT_EMBEDDINGS_PATH = os.path.join(MODEL_DIR, 'sbert_embeddings.npy')
-SBERT_MODEL_PATH = os.path.join(MODEL_DIR, 'sbert_model_name.pkl')
+SBERT_MODEL_PATH = os.path.join(MODEL_DIR, 'sbert_model.pkl')
 
 ASSETS = {}
 BM25_K1 = 1.2

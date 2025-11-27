@@ -4,19 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .Search {
-            border: 5px solid black;
-            width: 100vw;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/utility.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
 </head>
 <body>
-    <div class="Search ">Form</div>
+    <div class="main">
+        
+        <header>
+            <h1 class="font header">GameBrenk</h1>
+        </header>
+
+        <section class="section-1">
+            <h1 style="text-align: center;">Form</h1>
+        </section>
+
+        <section class="section-2">
+            <h1 style="text-align: center;">Newest Topic</h1>
+        </section>
+
+
+
+
+    </div>
 </body>
 </html>
+
+
+
+
