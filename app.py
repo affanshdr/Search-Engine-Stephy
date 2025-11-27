@@ -8,6 +8,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import re
 import os
 
+# TES
+
 app = Flask(__name__)
 
 MODEL_DIR = "models/"
