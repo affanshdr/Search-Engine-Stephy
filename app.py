@@ -95,17 +95,21 @@ def get_latest_news(num_items=9):
     df = ASSETS['corpus_df'].copy()
 
     if 'timestamp' in df.columns:
-        latest_df = df.sort_values(by='timestamp', ascending=False).head(num_items)
+        latest_df = df.sort_values(by='timestamp', ascending=False)
     else:
-        latest_df = df.sort_values(by='id_dokumen', ascending=False).head(num_items)
-        
+        latest_df = df.sort_values(by='id_dokumen', ascending=False)
+
+    # Mulai dari indeks ke-4 (skip 3 item rusak)
+    latest_df = latest_df.iloc[11:11 + num_items]
+
     return latest_df[[
         'judul', 'url', 'url_thumbnail', 'tanggal_terbit', 'sumber'
     ]].to_dict('records')
 
+
 @app.route('/', methods=['GET'])
 def index():
-    latest_news = get_latest_news(num_items=5)
+    latest_news = get_latest_news(num_items=9)
     return render_template('index.html', latest_news=latest_news)
 
 # @app.route('/search', methods=['GET'])
