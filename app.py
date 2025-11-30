@@ -1,4 +1,4 @@
-
+import math # .....
 from flask import Flask, request, render_template, redirect, url_for
 import pickle
 import numpy as np
@@ -18,6 +18,8 @@ BM25_MODEL_PATH = os.path.join(MODEL_DIR, 'bm25_model.pkl')
 CORPUS_DF_PATH = os.path.join(MODEL_DIR, 'df_corpus.pkl')
 SBERT_EMBEDDINGS_PATH = os.path.join(MODEL_DIR, 'sbert_embeddings.npy')
 SBERT_MODEL_PATH = os.path.join(MODEL_DIR, 'sbert_model.pkl')
+
+RESULTS_PER_PAGE = 10 # ......
 
 ASSETS = {}
 BM25_K1 = 1.2
@@ -49,7 +51,7 @@ def search_bm25(query_tokens, top_k):
     doc_scores = ASSETS['bm25_model'].get_scores(query_tokens)
     ranked_indices = np.argsort(doc_scores)[::-1]
 
-    results = ASSETS['corpus_df'].iloc([ranked_indices[:top_k]].copy())
+    results = ASSETS['corpus_df'].iloc[ranked_indices[:top_k]].copy()
     results['score'] = doc_scores[ranked_indices[:top_k]]
     results['algorithm'] = 'BM25'
 
@@ -68,7 +70,7 @@ def search_sbert(query, top_k):
     
     return results
 
-def run_combined_search(raw_query, top_k=5):
+def run_combined_search(raw_query, top_k=50):
     bm25_query_tokens = str(raw_query).lower().split()
 
     bm25_results = search_bm25(bm25_query_tokens, top_k)
@@ -89,7 +91,7 @@ def run_combined_search(raw_query, top_k=5):
         'judul', 'url', 'score', 'algorithm', 'sumber', 'tanggal_terbit', 'rank', 'url_thumbnail'
     ]].to_dict('records')
 
-def get_latest_news(num_items=5):
+def get_latest_news(num_items=9):
     df = ASSETS['corpus_df'].copy()
 
     if 'timestamp' in df.columns:
@@ -106,23 +108,63 @@ def index():
     latest_news = get_latest_news(num_items=5)
     return render_template('index.html', latest_news=latest_news)
 
+# @app.route('/search', methods=['GET'])
+# def search_results():
+#     query = request.args.get('query')
+#     results = []
+
+#     if query:
+#         try:
+#             results = run_combined_search(query, top_k=5)
+#         except Exception as e:
+#             print(f"ERROR saat melakukan pencarian: {e}")
+#             results = []
+
+#     if query:
+#         return render_template('result.html', results=results, query=query)
+#     else:
+#         return redirect(url_for('index'))
+    
 @app.route('/search', methods=['GET'])
 def search_results():
     query = request.args.get('query')
+    page = request.args.get('page', 1, type=int)  # <- tambah ini
     results = []
-
+    total_results = 0  # <- tambah ini
+    total_pages = 0    # <- tambah ini
+    
     if query:
         try:
-            results = run_combined_search(query, top_k=5)
+            all_results = run_combined_search(query, top_k=50)
+            total_results = len(all_results)  # <- tambah ini
+            total_pages = math.ceil(total_results / RESULTS_PER_PAGE)  # <- tambah ini
+            
+            # Pagination - tambah 3 baris ini
+            start_idx = (page - 1) * RESULTS_PER_PAGE
+            end_idx = start_idx + RESULTS_PER_PAGE
+            results = all_results[start_idx:end_idx]
+            
         except Exception as e:
             print(f"ERROR saat melakukan pencarian: {e}")
             results = []
 
     if query:
-        return render_template('result.html', results=results, query=query)
+        return render_template('result.html', 
+                             results=results, 
+                             query=query,
+                             page=page,                    # <- tambah
+                             total_results=total_results,  # <- tambah
+                             total_pages=total_pages,      # <- tambah
+                             results_per_page=RESULTS_PER_PAGE)  # <- tambah
     else:
         return redirect(url_for('index'))
     
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
+
+
+
 if __name__ == '__main__':
     try:
         load_assets()

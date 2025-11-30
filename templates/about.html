@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - Gamebrenk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e0f2fe',
+                            100: '#bae6fd',
+                            200: '#7dd3fc',
+                            300: '#38bdf8',
+                            400: '#0ea5e9',
+                            500: '#00d9ff',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        accent: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ff0080',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        },
+                        dark: {
+                            50: '#18181b',
+                            100: '#1a1a1d',
+                            200: '#27272a',
+                            300: '#3f3f46',
+                            400: '#52525b',
+                            500: '#71717a',
+                            600: '#a1a1aa',
+                            700: '#d4d4d8',
+                            800: '#e4e4e7',
+                            900: '#09090b',
+                            950: '#050505',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-dark-950 shadow-lg border-b border-dark-200 sticky top-0 z-50 backdrop-blur-sm bg-opacity-95">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-3 hover:opacity-80 transition">
+                    <i class="fas fa-gamepad text-primary-500 text-2xl animate-pulse"></i>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
+                        Gamebrenk
+                    </h1>
+                </a>
+                <nav class="flex space-x-6">
+                    <a href="/" class="text-dark-700 hover:text-primary-500 transition-colors relative group">
+                        Beranda
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="/about" class="text-secondary-500 font-semibold">Tentang</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-5xl mx-auto">
+            <!-- Hero Section -->
+            <div class="text-center mb-16 relative">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary-500 rounded-full opacity-5 blur-3xl"></div>
+                <div class="absolute top-20 right-1/4 w-64 h-64 bg-secondary-500 rounded-full opacity-5 blur-3xl"></div>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 relative z-10">
+                    Tentang <span class="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Gamebrenk</span>
+                </h1>
+                <p class="text-xl text-dark-600 max-w-3xl mx-auto relative z-10">
+                    <i class="fas fa-trophy text-accent-500 mr-2"></i>
+                    Platform pencarian berita game berbasis AI yang membantu Anda menemukan informasi gaming terkini dengan cepat dan akurat
+                </p>
+            </div>
+
+            <!-- What is Gamebrenk -->
+            <section class="bg-dark-100 border border-dark-200 rounded-2xl shadow-lg p-8 md:p-12 mb-8 hover:border-primary-500/50 transition-all duration-300 group">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-500/20 to-primary-500/5 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-lightbulb text-primary-500 text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">Apa itu Gamebrenk?</h2>
+                </div>
+                <p class="text-dark-700 text-lg leading-relaxed mb-4">
+                    Gamebrenk adalah mesin pencari khusus untuk berita dan artikel seputar dunia gaming. Dengan memanfaatkan teknologi Information Retrieval modern, kami menyediakan sistem pencarian yang intelligent dan efisien untuk membantu para gamer, content creator, dan enthusiast gaming menemukan informasi yang mereka butuhkan.
+                </p>
+                <p class="text-dark-700 text-lg leading-relaxed">
+                    Platform ini dikembangkan sebagai solusi untuk mengatasi overload informasi di dunia gaming, di mana setiap hari muncul ratusan berita, review, update, dan artikel. Gamebrenk memudahkan Anda untuk menemukan konten yang paling relevan dengan kebutuhan Anda.
+                </p>
+            </section>
+
+            <!-- Technology Stack -->
+            <section class="bg-dark-100 border border-dark-200 rounded-2xl shadow-lg p-8 md:p-12 mb-8 hover:border-secondary-500/50 transition-all duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-secondary-500/20 to-secondary-500/5 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-cogs text-secondary-500 text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">Teknologi yang Digunakan</h2>
+                </div>
+                <p class="text-dark-700 text-lg mb-6">
+                    Gamebrenk dibangun menggunakan kombinasi teknologi Information Retrieval klasik dan modern untuk menghasilkan hasil pencarian yang optimal:
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- BM25 -->
+                    <div class="bg-dark-50 border-2 border-primary-500/30 rounded-xl p-6 hover:border-primary-500 hover:shadow-lg hover:shadow-primary-500/20 transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary-500/20 to-primary-500/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-search text-primary-500 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white text-center mb-3">BM25</h3>
+                        <p class="text-dark-600 text-center">
+                            Algoritma ranking probabilistik yang mengukur relevansi dokumen berdasarkan frekuensi dan distribusi term dalam query
+                        </p>
+                    </div>
+
+                    <!-- S-BERT -->
+                    <div class="bg-dark-50 border-2 border-secondary-500/30 rounded-xl p-6 hover:border-secondary-500 hover:shadow-lg hover:shadow-secondary-500/20 transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary-500/20 to-secondary-500/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-brain text-secondary-500 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white text-center mb-3">S-BERT</h3>
+                        <p class="text-dark-600 text-center">
+                            Sentence-BERT menggunakan deep learning untuk memahami makna semantik dan konteks query secara mendalam
+                        </p>
+                    </div>
+
+                    <!-- Flask -->
+                    <div class="bg-dark-50 border-2 border-accent-500/30 rounded-xl p-6 hover:border-accent-500 hover:shadow-lg hover:shadow-accent-500/20 transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent-500/20 to-accent-500/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-server text-accent-500 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white text-center mb-3">Flask</h3>
+                        <p class="text-dark-600 text-center">
+                            Web framework Python yang lightweight dan fleksibel untuk membangun aplikasi web yang cepat dan responsif
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-dark-50 border border-dark-300 rounded-xl p-6">
+                    <h4 class="font-bold text-white mb-3 flex items-center">
+                        <i class="fas fa-info-circle text-primary-500 mr-2"></i>
+                        Hybrid Search Approach
+                    </h4>
+                    <p class="text-dark-700 leading-relaxed">
+                        Gamebrenk menggunakan pendekatan <strong class="text-primary-500">hybrid search</strong> yang mengombinasikan kekuatan BM25 (keyword-based) dan S-BERT (semantic-based). Setiap query diproses oleh kedua algoritma secara paralel, menghasilkan dua set hasil yang kemudian ditampilkan secara bersamaan. Pendekatan ini memastikan Anda mendapatkan hasil yang relevan baik dari segi kata kunci maupun konteks semantik.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section class="bg-dark-100 border border-dark-200 rounded-2xl shadow-lg p-8 md:p-12 mb-8 hover:border-accent-500/50 transition-all duration-300">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-accent-500/20 to-accent-500/5 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-users text-accent-500 text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">Tim Pengembang</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Team Member 1 -->
+                    <div class="bg-dark-50 border border-dark-300 rounded-xl p-6 text-center hover:border-primary-500 hover:shadow-lg hover:shadow-primary-500/20 transition-all duration-300">
+                        <div class="w-32 h-32 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-primary-500/50">
+                            <i class="fas fa-user text-dark-500 text-5xl"></i>
+                            <!-- Uncomment untuk foto asli -->
+                            <!-- <img src="URL_FOTO_1" alt="Developer 1" class="w-full h-full object-cover"> -->
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Nama Developer 1</h3>
+                        <p class="text-primary-500 font-semibold mb-2">NIM: 123456789</p>
+                        <p class="text-dark-600 mb-4">Program Studi / Jurusan</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" target="_blank" class="w-10 h-10 bg-dark-200 rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" target="_blank" class="w-10 h-10 bg-dark-200 rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" target="_blank" class="w-10 h-10 bg-dark-200 rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all hover:scale-110">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 2 -->
+                    <div class="bg-dark-50 border border-dark-300 rounded-xl p-6 text-center hover:border-secondary-500 hover:shadow-lg hover:shadow-secondary-500/20 transition-all duration-300">
+                        <div class="w-32 h-32 bg-gradient-to-br from-secondary-500/20 to-accent-500/20 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-secondary-500/50">
+                            <i class="fas fa-user text-dark-500 text-5xl"></i>
+                            <!-- Uncomment untuk foto asli -->
+                            <!-- <img src="URL_FOTO_2" alt="Developer 2" class="w-full h-full object-cover"> -->
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Nama Developer 2</h3>
+                        <p class="text-secondary-500 font-semibold mb-2">NIM: 987654321</p>
+                        <p class="text-dark-600 mb-4">Program Studi / Jurusan</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" target="_blank" class="w-10 h-10 bg-dark-200 rounded-full flex items-center justify-center hover:bg-secondary-500 hover:text-white transition-all hover:scale-110">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" target="_blank" class="w-10 h-10 bg-dark-200 rounded-full flex items-center justify-center hover:bg-secondary-500 hover:text-white transition-all hover:scale-110">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" target="_blank" class="w-10 h-10 bg-dark-200 rounded-full flex items-center justify-center hover:bg-secondary-500 hover:text-white transition-all hover:scale-110">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-2xl shadow-2xl p-8 md:p-12 text-white text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-dark-900 opacity-20"></div>
+                <div class="max-w-2xl mx-auto relative z-10">
+                    <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+                        <i class="fas fa-envelope text-5xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-4">Hubungi Kami</h2>
+                    <p class="text-lg mb-6 opacity-90">
+                        Ada pertanyaan, saran, atau ingin berkolaborasi? Jangan ragu untuk menghubungi kami!
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-6">
+                        <a href="mailto:email@example.com" class="flex items-center space-x-2 bg-white text-dark-900 px-6 py-3 rounded-lg hover:bg-dark-100 hover:scale-105 transition-all font-semibold shadow-lg">
+                            <i class="fas fa-envelope"></i>
+                            <span>email@example.com</span>
+                        </a>
+                        <a href="#" target="_blank" class="flex items-center space-x-2 bg-white text-dark-900 px-6 py-3 rounded-lg hover:bg-dark-100 hover:scale-105 transition-all font-semibold shadow-lg">
+                            <i class="fab fa-discord"></i>
+                            <span>@gamebrenk</span>
+                        </a>
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" target="_blank" class="w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-40 rounded-full flex items-center justify-center transition-all hover:scale-110">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" target="_blank" class="w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-40 rounded-full flex items-center justify-center transition-all hover:scale-110">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" target="_blank" class="w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-40 rounded-full flex items-center justify-center transition-all hover:scale-110">
+                            <i class="fab fa-twitch text-xl"></i>
+                        </a>
+                        <a href="#" target="_blank" class="w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-40 rounded-full flex items-center justify-center transition-all hover:scale-110">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-950 border-t border-dark-200 text-white py-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <p class="text-dark-600 mb-4 md:mb-0">
+                    &copy; 2024 <span class="text-primary-500 font-semibold">Gamebrenk</span>. Powered by BM25 & S-BERT AI
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-dark-600 hover:text-primary-500 transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-dark-600 hover:text-secondary-500 transition-colors">
+                        <i class="fab fa-discord text-xl"></i>
+                    </a>
+                    <a href="#" class="text-dark-600 hover:text-accent-500 transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d9ff;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</body>
+</html>

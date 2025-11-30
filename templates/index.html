@@ -1,35 +1,294 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/utility.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
+    <title>Gamebrenk - Cari Berita Game Terkini</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Gaming Primary - Neon Cyan/Electric Blue
+                        primary: {
+                            50: '#e0f2fe',
+                            100: '#bae6fd',
+                            200: '#7dd3fc',
+                            300: '#38bdf8',
+                            400: '#0ea5e9',
+                            500: '#00d9ff', // Neon Cyan
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        // Gaming Secondary - Neon Purple/Magenta
+                        secondary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7', // Neon Purple
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        // Gaming Accent - Neon Pink/Red
+                        accent: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ff0080', // Neon Pink
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        },
+                        // Dark Background - Deep Dark
+                        dark: {
+                            50: '#18181b',
+                            100: '#1a1a1d',
+                            200: '#27272a',
+                            300: '#3f3f46',
+                            400: '#52525b',
+                            500: '#71717a',
+                            600: '#a1a1aa',
+                            700: '#d4d4d8',
+                            800: '#e4e4e7',
+                            900: '#09090b', // Darkest
+                            950: '#050505', // Extra dark
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <div class="main">
+
+<body class="bg-dark-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-dark-950 shadow-lg border-b border-dark-200 backdrop-blur-sm bg-opacity-95 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-gamepad text-primary-500 text-2xl animate-pulse"></i>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
+                        Gamebrenk
+                    </h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="/" class="text-dark-700 font-semibold hover:text-primary-500 transition-colors duration-300 relative group">
+                        Beranda
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="/about" class="text-dark-700 font-semibold hover:text-secondary-500 transition-colors duration-300 relative group">
+                        Tentang
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Search -->
+    <section class="container mx-auto px-4 py-16 relative">
+        <!-- Glow Effects -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500 rounded-full opacity-10 blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-500 rounded-full opacity-10 blur-3xl"></div>
         
-        <header>
-            <h1 class="font header">GameBrenk</h1>
-        </header>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                Temukan Berita <span class="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Gaming</span> Terkini
+            </h2>
+            <p class="text-lg text-dark-600 mb-8">
+                <i class="fas fa-bolt text-primary-500 mr-2"></i>
+                Pencarian super cepat dengan teknologi BM25 & S-BERT AI
+            </p>
+            
+            <!-- Search Form -->
+            <form action="/search" method="GET" class="relative">
+                <div class="flex items-center bg-dark-100 rounded-full shadow-2xl shadow-primary-500/20 hover:shadow-primary-500/40 transition-all duration-300 overflow-hidden border-2 border-dark-200 focus-within:border-primary-500">
+                    <input 
+                        type="text" 
+                        name="query" 
+                        placeholder="Cari game, berita, update, atau review..." 
+                        class="flex-1 px-6 py-4 text-white bg-transparent focus:outline-none text-lg placeholder-dark-500"
+                        required
+                        autocomplete="off"
+                    >
+                    <button 
+                        type="submit" 
+                        class="bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white px-8 py-4 transition-all duration-300 flex items-center space-x-2 font-semibold"
+                    >
+                        <i class="fas fa-search"></i>
+                        <span>Cari</span>
+                    </button>
+                </div>
+            </form>
 
-        <section class="section-1">
-            <h1 style="text-align: center;">Form</h1>
-        </section>
+            <!-- Quick Search Tags -->
+            <div class="mt-6 flex flex-wrap justify-center gap-2">
+                <span class="text-sm text-dark-600"><i class="fas fa-fire text-accent-500 mr-1"></i> Trending:</span>
+                <button onclick="document.querySelector('input[name=query]').value='steam'; document.querySelector('form').submit();" 
+                        class="px-4 py-1.5 bg-dark-200 hover:bg-primary-500 text-dark-700 hover:text-white rounded-full text-sm transition-all duration-300 border border-dark-300 hover:border-primary-500">
+                    <i class="fab fa-steam mr-1"></i> Steam
+                </button>
+                <button onclick="document.querySelector('input[name=query]').value='playstation'; document.querySelector('form').submit();" 
+                        class="px-4 py-1.5 bg-dark-200 hover:bg-secondary-500 text-dark-700 hover:text-white rounded-full text-sm transition-all duration-300 border border-dark-300 hover:border-secondary-500">
+                    <i class="fab fa-playstation mr-1"></i> PlayStation
+                </button>
+                <button onclick="document.querySelector('input[name=query]').value='xbox'; document.querySelector('form').submit();" 
+                        class="px-4 py-1.5 bg-dark-200 hover:bg-accent-500 text-dark-700 hover:text-white rounded-full text-sm transition-all duration-300 border border-dark-300 hover:border-accent-500">
+                    <i class="fab fa-xbox mr-1"></i> Xbox
+                </button>
+                <button onclick="document.querySelector('input[name=query]').value='esports'; document.querySelector('form').submit();" 
+                        class="px-4 py-1.5 bg-dark-200 hover:bg-primary-500 text-dark-700 hover:text-white rounded-full text-sm transition-all duration-300 border border-dark-300 hover:border-primary-500">
+                    <i class="fas fa-trophy mr-1"></i> Esports
+                </button>
+            </div>
+        </div>
+    </section>
 
-        <section class="section-2">
-            <h1 style="text-align: center;">Newest Topic</h1>
-        </section>
+    <!-- Latest News Section -->
+    <section class="container mx-auto px-4 py-12">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fas fa-newspaper text-primary-500 mr-3"></i>
+                    Berita Terbaru
+                </h3>
+            </div>
 
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for news in latest_news %}
+                <a href="{{ news.url }}" target="_blank" class="group">
+                    <div class="bg-dark-100 rounded-xl shadow-lg hover:shadow-primary-500/30 transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-dark-200 hover:border-primary-500">
+                        <div class="relative overflow-hidden h-48 bg-gradient-to-br from-dark-200 to-dark-300">
+                            {% if news.url_thumbnail %}
+                            <img 
+                                src="{{ news.url_thumbnail }}" 
+                                alt="{{ news.judul }}"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22%3E%3Crect fill=%22%2318181b%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%2371717a%22%3ENo Image%3C/text%3E%3C/svg%3E'"
+                            >
+                            {% else %}
+                            <div class="w-full h-full flex items-center justify-center">
+                                <i class="fas fa-gamepad text-6xl text-dark-400"></i>
+                            </div>
+                            {% endif %}
+                            <div class="absolute top-3 right-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                                NEW
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60"></div>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-bold text-white text-lg mb-2 line-clamp-2 group-hover:text-primary-500 transition-colors duration-300">
+                                {{ news.judul }}
+                            </h4>
+                            <div class="flex items-center justify-between text-sm text-dark-600">
+                                <span class="flex items-center">
+                                    <i class="far fa-newspaper mr-1"></i>
+                                    {{ news.sumber }}
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="far fa-clock mr-1"></i>
+                                    {{ news.tanggal_terbit }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 
+    <!-- Features Section -->
+    <section class="container mx-auto px-4 py-16 mb-12">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-3xl font-bold text-white text-center mb-12">
+                <i class="fas fa-star text-accent-500 mr-2"></i>
+                Kenapa Pilih Gamebrenk?
+            </h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center bg-dark-100 p-8 rounded-xl border border-dark-200 hover:border-primary-500 transition-all duration-300 group">
+                    <div class="bg-gradient-to-br from-primary-500/20 to-primary-500/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-bolt text-primary-500 text-3xl"></i>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-white">Super Cepat</h4>
+                    <p class="text-dark-600">Hasil pencarian muncul dalam hitungan milidetik</p>
+                </div>
+                <div class="text-center bg-dark-100 p-8 rounded-xl border border-dark-200 hover:border-secondary-500 transition-all duration-300 group">
+                    <div class="bg-gradient-to-br from-secondary-500/20 to-secondary-500/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-brain text-secondary-500 text-3xl"></i>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-white">AI-Powered</h4>
+                    <p class="text-dark-600">Teknologi S-BERT untuk pemahaman konteks gaming</p>
+                </div>
+                <div class="text-center bg-dark-100 p-8 rounded-xl border border-dark-200 hover:border-accent-500 transition-all duration-300 group">
+                    <div class="bg-gradient-to-br from-accent-500/20 to-accent-500/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-bullseye text-accent-500 text-3xl"></i>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-white">Akurat</h4>
+                    <p class="text-dark-600">Kombinasi BM25 & S-BERT untuk hasil terbaik</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="bg-dark-950 border-t border-dark-200 text-white py-8 mt-auto">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <p class="text-dark-600 mb-4 md:mb-0">
+                    &copy; 2024 <span class="text-primary-500 font-semibold">Gamebrenk</span>. Powered by BM25 & S-BERT AI
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-dark-600 hover:text-primary-500 transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-dark-600 hover:text-secondary-500 transition-colors">
+                        <i class="fab fa-discord text-xl"></i>
+                    </a>
+                    <a href="#" class="text-dark-600 hover:text-accent-500 transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    </div>
+    <style>
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d9ff;
+        }
+    </style>
 </body>
 </html>
-
-
-
-
