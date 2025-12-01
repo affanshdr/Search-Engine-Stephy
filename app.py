@@ -10,7 +10,6 @@ import re
 import os
 
 # TES
-
 app = Flask(__name__)
 
 MODEL_DIR = "models/"
