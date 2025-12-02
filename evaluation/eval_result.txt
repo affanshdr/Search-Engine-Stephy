@@ -1,0 +1,19 @@
+
+=================================================
+HASIL EVALUASI INFORMATION RETRIEVAL (TOP-10)
+=================================================
+Jumlah Query: 401
+Ground Truth Method: Cross-Encoder (MS-MARCO)
+
+1. ALGORITMA BM25 (Lexical)
+   - Mean Precision@10 : 0.2566
+   - Mean Recall@10    : 0.8443
+   - Mean F1-Score@10  : 0.3378
+   - MAP (Mean AP)     : 0.7358
+
+2. ALGORITMA S-BERT (Semantic)
+   - Mean Precision@10 : 0.2002
+   - Mean Recall@10    : 0.6596
+   - Mean F1-Score@10  : 0.2616
+   - MAP (Mean AP)     : 0.5005
+=================================================
