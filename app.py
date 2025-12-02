@@ -171,7 +171,7 @@ def about():
 if __name__ == '__main__':
     try:
         load_assets()
-        app.run(debug=True)
+        app.run(debug=True, port=3000, host="0.0.0.0")
     except FileNotFoundError:
         print("\n SERVER GAGAL DIMULAI, model tidak ditemukan: {e}")
     except Exception as e:
