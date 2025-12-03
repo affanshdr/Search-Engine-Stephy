@@ -46,6 +46,63 @@ def load_assets():
         print(f"ERROR saat memuat aset: {e}")
         raise Exception(f"Gagal memuat model: {e}")
 
+# def search_bm25(query_tokens, top_k):
+#     doc_scores = ASSETS['bm25_model'].get_scores(query_tokens)
+#     ranked_indices = np.argsort(doc_scores)[::-1]
+
+#     results = ASSETS['corpus_df'].iloc[ranked_indices[:top_k]].copy()
+#     results['score'] = doc_scores[ranked_indices[:top_k]]
+#     results['algorithm'] = 'BM25'
+
+#     return results
+
+# def search_sbert(query, top_k):
+#     query_embedding = ASSETS['sbert_model'].encode(query, convert_to_tensor=False)
+    
+#     similarities = cosine_similarity(query_embedding.reshape(1, -1), ASSETS['sbert_embeddings'])[0]
+    
+#     ranked_indices = np.argsort(similarities)[::-1]
+    
+#     results = ASSETS['corpus_df'].iloc[ranked_indices[:top_k]].copy()
+#     results['score'] = similarities[ranked_indices[:top_k]]
+#     results['algorithm'] = 'S-BERT'
+    
+#     return results
+
+# def run_combined_search(raw_query, top_k=100):
+#     bm25_query_tokens = str(raw_query).lower().split()
+
+#     bm25_results = search_bm25(bm25_query_tokens, top_k)
+#     sbert_results = search_sbert(raw_query, top_k)
+
+#     # Tambahkan rank SEBELUM reset_index
+#     bm25_results['rank'] = range(1, len(bm25_results) + 1)
+#     sbert_results['rank'] = range(1, len(sbert_results) + 1)
+    
+#     # Reset index
+#     bm25_results = bm25_results.reset_index(drop=True)
+#     sbert_results = sbert_results.reset_index(drop=True)
+
+#     # Gabungkan hasil (urutan tetap terjaga per algoritma)
+#     combined_df = pd.concat([
+#         bm25_results,
+#         sbert_results
+#     ])
+
+
+#     # HAPUS sort_values ini atau ganti dengan yang lebih tepat
+#     # Jika ingin menampilkan BM25 dulu, lalu S-BERT (masing-masing tetap terurut):
+#     combined_df['algo_order'] = combined_df['algorithm'].map({'BM25': 0, 'S-BERT': 1})
+#     combined_df = combined_df.sort_values(by=['algo_order', 'rank'])
+#     combined_df = combined_df.drop(columns=['algo_order'])
+
+
+#     return combined_df[[
+#         'judul', 'url', 'score', 'algorithm', 'sumber', 'tanggal_terbit', 'rank', 'url_thumbnail'
+#     ]].to_dict('records')
+
+
+#----
 def search_bm25(query_tokens, top_k):
     doc_scores = ASSETS['bm25_model'].get_scores(query_tokens)
     ranked_indices = np.argsort(doc_scores)[::-1]
@@ -69,28 +126,54 @@ def search_sbert(query, top_k):
     
     return results
 
-def run_combined_search(raw_query, top_k=50):
+def run_combined_search(raw_query, top_k=100):
     bm25_query_tokens = str(raw_query).lower().split()
 
     bm25_results = search_bm25(bm25_query_tokens, top_k)
     sbert_results = search_sbert(raw_query, top_k)
 
+    # Tambahkan rank per algoritma
+    bm25_results['algo_rank'] = range(1, len(bm25_results) + 1)
+    sbert_results['algo_rank'] = range(1, len(sbert_results) + 1)
+    
+    # Reset index
     bm25_results = bm25_results.reset_index(drop=True)
     sbert_results = sbert_results.reset_index(drop=True)
 
+    # Gabungkan hasil
     combined_df = pd.concat([
         bm25_results,
         sbert_results
     ])
 
-    combined_df['rank'] = combined_df.groupby('algorithm').cumcount() + 1
-    combined_df = combined_df.sort_values(by='algorithm', ascending=False)
+    # NORMALISASI SCORE (agar bisa dibandingkan secara adil)
+    # BM25 dan S-BERT punya skala score yang berbeda
+    for algo in ['BM25', 'S-BERT']:
+        mask = combined_df['algorithm'] == algo
+        scores = combined_df.loc[mask, 'score']
+        if len(scores) > 0 and scores.max() != scores.min():
+            # Min-Max Normalization ke range [0, 1]
+            combined_df.loc[mask, 'normalized_score'] = (
+                (scores - scores.min()) / (scores.max() - scores.min())
+            )
+        else:
+            combined_df.loc[mask, 'normalized_score'] = 0.5
+
+    # Urutkan berdasarkan normalized score (descending)
+    combined_df = combined_df.sort_values(by='normalized_score', ascending=False)
+    
+    # Tambahkan overall rank
+    combined_df['overall_rank'] = range(1, len(combined_df) + 1)
 
     return combined_df[[
-        'judul', 'url', 'score', 'algorithm', 'sumber', 'tanggal_terbit', 'rank', 'url_thumbnail'
+        'judul', 'url', 'score', 'normalized_score', 'algorithm', 
+        'sumber', 'tanggal_terbit', 'algo_rank', 'overall_rank', 'url_thumbnail'
     ]].to_dict('records')
+#---- 
+
 
 def get_latest_news(num_items=9):
+    
     df = ASSETS['corpus_df'].copy()
 
     if 'timestamp' in df.columns:
@@ -165,7 +248,6 @@ def search_results():
 @app.route('/about', methods=['GET'])
 def about():
     return render_template('about.html')
-
 
 
 if __name__ == '__main__':
