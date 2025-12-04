@@ -72,7 +72,7 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex items-center justify-between">
                 <a href="/" class="flex items-center space-x-2 hover:opacity-80 transition">
-                    <i class="fas fa-gamepad text-primary-500 text-2xl"></i>
+                    <i class="fas fa-gamepad text-primary-500 text-2xl animate-pulse"></i>
                     <h1 class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent">
                         Gamebrenk
                     </h1>
@@ -189,7 +189,7 @@
                                         {% else %}
                                         text-secondary-500
                                         {% endif %}
-                                    ">{{ result.score|round(4) }}</strong>
+                                    ">{{ result.normalized_score|round(4) }}</strong>
                                 </div>
                                 <div class="w-full bg-dark-200 rounded-full h-2 overflow-hidden">
                                     <div class="h-full rounded-full transition-all
@@ -198,7 +198,7 @@
                                         {% else %}
                                         bg-gradient-to-r from-secondary-500 to-secondary-400
                                         {% endif %}
-                                    " style="width: {% if result.score <= 1 %}{{ (result.score * 100)|round(2) }}{% else %}100{% endif %}%"></div>
+                                    " style="width: {{ (result.normalized_score * 100)|round(2) }}%"></div>
                                 </div>
                             </div>
                         </div>
